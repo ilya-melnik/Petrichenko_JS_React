@@ -8,8 +8,14 @@ let obj = {
     border: "red",
     background: "grey",
   },
+  //method of object
+  makeTest: function () {
+    console.log("test");
+  },
 };
 
-// подсчет количества ключей в обьекте 
+// подсчет количества ключей в обьекте
 
-console.log(Object.keys(obj).length)
+console.log(Object.keys(obj).length);
+
+obj.makeTest();
