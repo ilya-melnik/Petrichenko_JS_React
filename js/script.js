@@ -10,16 +10,6 @@ let obj = {
   },
 };
 
-for (let key in obj) {
-  if (typeof obj[key] === "object") {
-    for (let i in obj[key]) {
-      console.log(
-        `Обьект  имеет такие ключи ${i} и ткие ${obj[key][i]} значеня`
-      );
-    }
-  } else {
-    console.log(
-      `Обьект obj имеет такие ключи ${key} и ткие ${obj[key]} значения`
-    );
-  }
-}
+// подсчет количества ключей в обьекте 
+
+console.log(Object.keys(obj).length)
