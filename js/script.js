@@ -46,7 +46,9 @@ function detectPersonalLevel() {
 // detectPersonalLevel();
 
 function showMyDB(hidden) {
-  !hidden ? console.log(personalMovieDB) : null;
+  if (!hidden) {
+    console.log(personalMovieDB);
+  }
 }
 showMyDB(personalMovieDB.privat);
 
