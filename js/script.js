@@ -17,5 +17,8 @@ let obj = {
 // подсчет количества ключей в обьекте
 
 console.log(Object.keys(obj).length);
-
 obj.makeTest();
+
+//Destructuring
+const {border, background} = obj.colors;
+console.log(border);
