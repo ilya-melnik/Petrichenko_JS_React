@@ -27,15 +27,19 @@ const wrapper = document.querySelector(".btn-block");
 
 wrapper.addEventListener("click", (e) => {
   //1.
-  if (e.target && e.target.tagName === "BUTTON") {
-    // e.target && требование гугл, чтобы правильно отробатывался
-    // вдруг кликнут по переносу строки
-    console.log(e.target.tagName);
-  }
+  // if (e.target && e.target.tagName === "BUTTON") {
+  //   // e.target && требование гугл, чтобы правильно отробатывался
+  //   // вдруг кликнут по переносу строки
+  //   console.log(e.target.tagName);
+  // }
   // 2.
   // if (e.target && e.target.classList.contains("blue")) {
   //   console.log("hello");
   // }
+  // 3. гугл любит, проверка, совпадает ли эл. с чем-то
+  if(e.target && e.target.matches("button.red")){
+    console.log(e.target.tagName);
+  }
 });
 // Динамическое создание кнопки, делегирование срабатывает:
 const btn = document.createElement("button");
