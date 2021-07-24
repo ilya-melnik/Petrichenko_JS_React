@@ -26,7 +26,9 @@ btns[0].addEventListener("click", () => {
 const wrapper = document.querySelector(".btn-block");
 
 wrapper.addEventListener("click", (e) => {
-  if (e.target.tagName === "BUTTON") {
+  if (e.target && e.target.tagName === "BUTTON") {
+    // e.target && требование гугл, чтобы правильно отробатывался
+    // вдруг кликнут по переносу строки
     console.log(e.target.tagName);
   }
 });
