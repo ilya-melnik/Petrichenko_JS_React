@@ -16,8 +16,17 @@ btns[0].addEventListener("click", () => {
 //   btns[1].classList.toggle("red");
 // });
 
-
 // where to use? ?
-// Переключение гамбургера, при нажатии на гамбурегр, 
-// добавляется класс в нужное место и вылезает меню, при нажатии на крестик, 
+// Переключение гамбургера, при нажатии на гамбурегр,
+// добавляется класс в нужное место и вылезает меню, при нажатии на крестик,
 // класс убирается и меня прячется в гамбургер
+
+//EVEN DELEGATION
+
+const wrapper = document.querySelector(".btn-block");
+
+wrapper.addEventListener("click", (e) => {
+  if (e.target.tagName === "BUTTON") {
+    console.log(e.target.tagName);
+  }
+});
