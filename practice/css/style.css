@@ -1,0 +1,12 @@
+.wrapper {
+  width: 400px;
+  height: 400px;
+  border: 1px solid black;
+}
+
+.box {
+  width: 90px;
+  height: 90px;
+  border: 1px solid black;
+  background: yellow;
+}

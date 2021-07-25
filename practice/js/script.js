@@ -16,3 +16,13 @@ const setTimeFiveSec = setTimeout(
 // 2. Чтобы отменить setTimeout действие, мы пишем:
 clearInterval(setTimeFiveSec);
 // Если юзер уже что-то сделал на странице (добавил в корзину)
+
+//////////////////////////////////////////////////////////////////
+// Рекурсивный setTimeout
+function timer(num) {
+  console.log(num);
+  if (num < 5) {
+    setTimeout(timer, 1000, ++num);
+  }
+}
+setTimeout(timer, 1000, 1);
