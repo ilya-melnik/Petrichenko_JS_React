@@ -25,4 +25,20 @@ function timer(num) {
     setTimeout(timer, 1000, ++num);
   }
 }
-setTimeout(timer, 1000, 1);
+// setTimeout(timer, 1000, 1);
+//---------------------------------------------
+// Напишите функцию printNumbers(from, to), которая выводит число каждую секунду, 
+//начиная от from и заканчивая to.
+// Сделайте два варианта решения.
+// Используя setInterval.
+function printNamber(from, to) {
+  let current = from;
+  let timerId = setInterval(() => {
+    console.log(current);
+    if (current == to) {
+      clearInterval(timerId);
+    }
+    current++;
+  }, 700);
+}
+printNamber(1, 4);
