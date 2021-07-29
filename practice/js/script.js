@@ -26,7 +26,7 @@ function timer(num) {
   }
 }
 // setTimeout(timer, 1000, 1);
-//---------------------------------------------
+//---------------------LernJs------------------------
 // Напишите функцию printNumbers(from, to), которая выводит число каждую секунду,
 //начиная от from и заканчивая to.
 // Сделайте два варианта решения.
@@ -44,14 +44,28 @@ function timer(num) {
 // printNamber(1, 5);
 
 //Используя рекурсивный setTimeout.
-function printNamber(from, to) {
-  let current = from;
-  setTimeout(function go() {
-    console.log(current);
-    if (current < to) {
-      setTimeout(go, 1000);
+// function printNamber(from, to) {
+//   let current = from;
+//   setTimeout(function go() {
+//     console.log(current);
+//     if (current < to) {
+//       setTimeout(go, 500);
+//     }
+//     current++;
+//   }, 1000);
+// }
+// printNamber(1, 5);
+
+let btn = document.querySelector(".btn").addEventListener("click", () => {
+  let box = document.querySelector(".box");
+  let pos = 0;
+  let timeId = setInterval(() => {
+    if (pos == 400) {
+      clearInterval(timeId);
+    } else {
+      pos++;
+      box.style.left = pos + "px";
+      box.style.top = pos + "px";
     }
-    current++;
-  }, 1000);
-}
-printNamber(1, 5);
+  }, 50);
+});
