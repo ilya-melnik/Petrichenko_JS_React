@@ -81,5 +81,11 @@ const btnLorem = document
     // lorem.style.height = lorem.scrollHeight + "px";
 
     // scrollTop - можно реализовать прогрес бар сколько юзер отлистал уже страницы
-    console.log(lorem.scrollTop);
+    // console.log(lorem.scrollTop);
+
+
+    // Но менять мы не можем! Но зная эти данные, 
+    //можем поменять инлайн стили, они более приоритетные.
+    const style = window.getComputedStyle(lorem);
+    console.log(style.margin);
   });
