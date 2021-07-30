@@ -56,11 +56,12 @@ function timer(num) {
 // }
 // printNamber(1, 5);
 
+// Анимация setInterval
 let btn = document.querySelector(".btn").addEventListener("click", () => {
   let box = document.querySelector(".box");
   let pos = 0;
   let timeId = setInterval(() => {
-    if (pos == 400) {
+    if (pos == 350) {
       clearInterval(timeId);
     } else {
       pos++;
