@@ -65,10 +65,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
   function setClock(selector, endtimer) {
     const timer = document.querySelector(selector),
-      days = document.querySelector("#days"),
-      hours = document.querySelector("#hours"),
-      minutes = document.querySelector("#minutes"),
-      seconds = document.querySelector("#seconds"),
+      days = timer.querySelector("#days"),
+      hours = timer.querySelector("#hours"),
+      minutes = timer.querySelector("#minutes"),
+      seconds = timer.querySelector("#seconds"),
       timerInterval = setInterval(updateClock, 1000);
     updateClock(); // чтобы в верстке не отображались даные с html
 
