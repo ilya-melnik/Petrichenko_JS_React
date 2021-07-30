@@ -73,10 +73,13 @@ function timer(num) {
 
 // 42 параметры документа. Окна и работа с ними
 
-// По click показывается полный текст
+// По click показывается весь текст c div
 const lorem = document.querySelector(".lorem");
 const btnLorem = document
   .querySelector(".btn_lorem")
   .addEventListener("click", () => {
-    lorem.style.height = lorem.scrollHeight + "px";
+    // lorem.style.height = lorem.scrollHeight + "px";
+
+    // scrollTop - можно реализовать прогрес бар сколько юзер отлистал уже страницы
+    console.log(lorem.scrollTop);
   });
