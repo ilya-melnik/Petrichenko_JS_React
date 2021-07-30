@@ -57,16 +57,26 @@ function timer(num) {
 // printNamber(1, 5);
 
 // Анимация setInterval
-let btn = document.querySelector(".btn").addEventListener("click", () => {
-  let box = document.querySelector(".box");
-  let pos = 0;
-  let timeId = setInterval(() => {
-    if (pos == 350) {
-      clearInterval(timeId);
-    } else {
-      pos++;
-      box.style.left = pos + "px";
-      box.style.top = pos + "px";
-    }
-  }, 50);
-});
+// let btn = document.querySelector(".btn").addEventListener("click", () => {
+//   let box = document.querySelector(".box");
+//   let pos = 0;
+//   let timeId = setInterval(() => {
+//     if (pos == 350) {
+//       clearInterval(timeId);
+//     } else {
+//       pos++;
+//       box.style.left = pos + "px";
+//       box.style.top = pos + "px";
+//     }
+//   }, 50);
+// });
+
+// 42 параметры документа. Окна и работа с ними
+
+// По click показывается полный текст
+const lorem = document.querySelector(".lorem");
+const btnLorem = document
+  .querySelector(".btn_lorem")
+  .addEventListener("click", () => {
+    lorem.style.height = lorem.scrollHeight + "px";
+  });
