@@ -89,7 +89,8 @@ window.addEventListener("DOMContentLoaded", () => {
   // Modal
   const modalTrigger = document.querySelectorAll("[data-modal]"),
     modal = document.querySelector(".modal"),
-    modalCloseBtn = document.querySelector("[data-close]");
+    modalCloseBtn = document.querySelector("[data-close]"),
+    btnMin = document.querySelectorAll("btn_min");
 
   modalTrigger.forEach((m) => {
     m.addEventListener("click", () => {
@@ -105,5 +106,13 @@ window.addEventListener("DOMContentLoaded", () => {
     // modal.classList.remove("show");
     modal.classList.toggle("show");
     document.body.style.overflow = "";
+  });
+
+//при нажатии на кнопку вокруг всплывшего модального окна, окно закрываеся 
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.classList.toggle("show");
+      document.body.style.overflow = "";
+    }
   });
 });
