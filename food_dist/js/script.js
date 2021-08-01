@@ -93,15 +93,17 @@ window.addEventListener("DOMContentLoaded", () => {
 
   modalTrigger.forEach((m) => {
     m.addEventListener("click", () => {
-      modal.classList.add("show");
-      modal.classList.remove("hide");
+      // modal.classList.add("show");
+      // modal.classList.remove("hide");
+      modal.classList.toggle("show");
       document.body.style.overflow = "hidden";
     });
   });
 
   modalCloseBtn.addEventListener("click", () => {
-    modal.classList.add("hide");
-    modal.classList.remove("show");
+    // modal.classList.add("hide");
+    // modal.classList.remove("show");
+    modal.classList.toggle("show");
     document.body.style.overflow = "";
   });
 });
