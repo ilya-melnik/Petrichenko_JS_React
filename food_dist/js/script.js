@@ -89,30 +89,57 @@ window.addEventListener("DOMContentLoaded", () => {
   // Modal
   const modalTrigger = document.querySelectorAll("[data-modal]"),
     modal = document.querySelector(".modal"),
-    modalCloseBtn = document.querySelector("[data-close]"),
-    btnMin = document.querySelectorAll("btn_min");
+    modalCloseBtn = document.querySelector("[data-close]");
+
+  function openModal() {
+    // modal.classList.add("show");
+    // modal.classList.remove("hide");
+    modal.classList.toggle("show");
+    document.body.style.overflow = "hidden";
+    //(если modal было открыто пользователем тогда не всплывать автоматически еще раз повторно
+    clearInterval(modalTimerId);
+  }
 
   modalTrigger.forEach((m) => {
-    m.addEventListener("click", () => {
-      // modal.classList.add("show");
-      // modal.classList.remove("hide");
-      modal.classList.toggle("show");
-      document.body.style.overflow = "hidden";
-    });
+    m.addEventListener("click", openModal);
   });
 
-  modalCloseBtn.addEventListener("click", () => {
+  function closeModal() {
     // modal.classList.add("hide");
     // modal.classList.remove("show");
     modal.classList.toggle("show");
     document.body.style.overflow = "";
-  });
+  }
+  modalCloseBtn.addEventListener("click", closeModal);
 
-//при нажатии на кнопку вокруг всплывшего модального окна, окно закрываеся 
+  //при нажатии на кнопку вокруг всплывшего модального окна, окно закрываеся
   modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      modal.classList.toggle("show");
-      document.body.style.overflow = "";
+    if (e.target === modal || e.target.code === "Escape") {
+      closeModal();
     }
   });
+
+  // even code можно на гуглить разные коды клавиатуры.
+  // close modalWindov on Click "Escype"
+  // если modal opan
+  // вызвать modal через 10 мин
+  document.addEventListener("keydown", (e) => {
+    if (e.code === "Escape" && modal.classList.contains("show")) {
+      closeModal();
+    }
+  });
+
+  // вызвать modal через 10 мин (если было открыто пользователем тогда очистить(записано выше clearInterval))
+  const modalTimerId = setTimeout(openModal, 60000);
+
+  // вызвать modal при скроле в конце страницы
+  window.addEventListener("scroll", (e) => {
+    if (
+      window.pageYOffset + document.documentElement.clientHeight >=
+      document.documentElement.scrollHeight
+    ) {
+      openModal();
+    }
+  });
+  function showModal
 });
