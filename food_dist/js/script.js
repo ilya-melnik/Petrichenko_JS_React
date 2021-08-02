@@ -132,14 +132,16 @@ window.addEventListener("DOMContentLoaded", () => {
   // вызвать modal через 10 мин (если было открыто пользователем тогда очистить(записано выше clearInterval))
   const modalTimerId = setTimeout(openModal, 60000);
 
-  // вызвать modal при скроле в конце страницы
-  window.addEventListener("scroll", (e) => {
+  function showModalByScroll() {
     if (
       window.pageYOffset + document.documentElement.clientHeight >=
       document.documentElement.scrollHeight
     ) {
       openModal();
+      // удаляет повторный вызов функции при доскроле (функция отражается однажды)
+      window.removeEventListener("scroll", showModalByScroll);
     }
-  });
-  function showModal
+  }
+  // вызвать modal при скроле в конце страницы
+  window.addEventListener("scroll", showModalByScroll);
 });
