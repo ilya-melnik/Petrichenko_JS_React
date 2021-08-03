@@ -1,91 +1,40 @@
-// Используется на странице когда пользователь зашел,
-// и если он не сделал какое-то действие через определенный интервал,
-// можно что-то вывести, или же наоборот, когда произошло действие которое хочет разработчик
-// (добавление в корзину или… можно отменить setTimeout)
+function Uzer(name, age, id) {
+  this.name = name;
+  this.age = age;
+  this.id = id;
+  this.city = "Lviv";
+  this.ask = function () {
+    console.log(`${name}, how are you ? `);
+  };
+}
+//Прототипом будет наследоваться новый метод sayHi
+Uzer.prototype.sayHi = function () {
+  console.log("hello");
+};
 
-const setTimeFiveSec = setTimeout(
-  function (argument) {
-    alert(argument);
-  },
-  5000,
-  "argument"
-);
+let ilya = new Uzer("ilya", 26, 1);
+let nina = new Uzer("nina", 24, 2);
 
-// в переменную ставится присваивается по двум причинам (не обязательно),
-// 1. Удобно считывать и пере использовать определённые интервалы
-// 2. Чтобы отменить setTimeout действие, мы пишем:
-clearInterval(setTimeFiveSec);
-// Если юзер уже что-то сделал на странице (добавил в корзину)
+console.log(ilya);
+console.log(nina);
+ilya.ask();
+ilya.sayHi();
+nina.sayHi();
 
-//////////////////////////////////////////////////////////////////
-// Рекурсивный setTimeout
-function timer(num) {
-  console.log(num);
-  if (num < 5) {
-    setTimeout(timer, 1000, ++num);
+//class es6
+class Uzers {
+  constructor(name, age, id) {
+    this.name = name;
+    this.age = age;
+    this.id = id;
+    this.city = "Lviv";
+  }
+  ask() {
+    console.log(`${this.name}, how are you ? `);
+  }
+  hello() {
+    console.log("hello");
   }
 }
-// setTimeout(timer, 1000, 1);
-//---------------------LernJs------------------------
-// Напишите функцию printNumbers(from, to), которая выводит число каждую секунду,
-//начиная от from и заканчивая to.
-// Сделайте два варианта решения.
-// Используя setInterval.
-// function printNamber(from, to) {
-//   let current = from;
-//   const timerId = setInterval(() => {
-//     console.log(current);
-//     if (current == to) {
-//       clearInterval(timerId);
-//     }
-//     current++;
-//   }, 500);
-// }
-// printNamber(1, 5);
 
-//Используя рекурсивный setTimeout.
-// function printNamber(from, to) {
-//   let current = from;
-//   setTimeout(function go() {
-//     console.log(current);
-//     if (current < to) {
-//       setTimeout(go, 500);
-//     }
-//     current++;
-//   }, 1000);
-// }
-// printNamber(1, 5);
-
-// Анимация setInterval
-// let btn = document.querySelector(".btn").addEventListener("click", () => {
-//   let box = document.querySelector(".box");
-//   let pos = 0;
-//   let timeId = setInterval(() => {
-//     if (pos == 350) {
-//       clearInterval(timeId);
-//     } else {
-//       pos++;
-//       box.style.left = pos + "px";
-//       box.style.top = pos + "px";
-//     }
-//   }, 50);
-// });
-
-// 42 параметры документа. Окна и работа с ними
-
-// По click показывается весь текст c div
-const lorem = document.querySelector(".lorem");
-const btnLorem = document
-  .querySelector(".btn_lorem")
-  .addEventListener("click", () => {
-    // lorem.style.height = lorem.scrollHeight + "px";
-
-    // scrollTop - можно реализовать прогрес бар сколько юзер отлистал уже страницы
-    // console.log(lorem.scrollTop);
-
-
-    // Но менять мы не можем! Но зная эти данные, 
-    //можем поменять инлайн стили, они более приоритетные.
-    const style = window.getComputedStyle(lorem);
-    console.log(style.margin);
-  });
+console.log(Uzers);
