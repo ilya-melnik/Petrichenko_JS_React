@@ -1,40 +1,65 @@
-function Uzer(name, age, id) {
-  this.name = name;
-  this.age = age;
-  this.id = id;
-  this.city = "Lviv";
-  this.ask = function () {
-    console.log(`${name}, how are you ? `);
-  };
+"use strict";
+function showThis(a, b) {
+  console.log(this);
+  function sum() {
+    console.log(this);
+    //this.a + this.b = не правильно
+    return a + b;
+  }
 }
-//Прототипом будет наследоваться новый метод sayHi
-Uzer.prototype.sayHi = function () {
-  console.log("hello");
+showThis(2, 3);
+// undefine undefine
+// 1) Обычная функция: this = window, но если 'use strict' - undefined
+const obj = {
+  a: 1,
+  b: 15,
+  sum: function () {
+    console.log(this);
+  },
+};
+obj.sum(); // return obj
+// 2) Контекст у методов обьекта - сам обьект
+// функция в нутри метода, имеет такой же контекст как и обычная функция
+// 3) this in constructor and class - it is new copy(экземпляр) obj
+// 4) ручная привяка this: call, apply, bind (bind создает новую функцию и под нее подвязывает контекст)
+
+// присвоение контекста в ручную
+function sayName(surname) {
+  console.log(this);
+  console.log(this.name + surname);
+}
+const user = {
+  name: "Ilay",
 };
 
-let ilya = new Uzer("ilya", 26, 1);
-let nina = new Uzer("nina", 24, 2);
+sayName.call(user, "Melnik");
+sayName.apply(user, ["Melnik"]);
 
-console.log(ilya);
-console.log(nina);
-ilya.ask();
-ilya.sayHi();
-nina.sayHi();
-
-//class es6
-class Uzers {
-  constructor(name, age, id) {
-    this.name = name;
-    this.age = age;
-    this.id = id;
-    this.city = "Lviv";
-  }
-  ask() {
-    console.log(`${this.name}, how are you ? `);
-  }
-  hello() {
-    console.log("hello");
-  }
+function count (num) {
+  return this*num
 }
+const double = count.bind(2)
+// bind - this, double - num
+console.log(double(10));
+console.log(double(100));
 
-console.log(Uzers);
+//----example----------
+const btn = document.querySelector("button");
+btn.addEventListener("click", function () {
+  console.log(this); // this - btn по которой кликнули(<button></button>). Works like even.target
+  this.style.backgroundColor = "red";
+});
+// стрелочная не имеет своего контекста, и берт его у родителя
+// если в обработчике событий используется => func. контекст вызова теряется
+const obj2 = {
+  num: 5,
+  sayNumber: function () {
+    const say = () => {
+      console.log(this.num);
+    };
+    say();
+  },
+};
+obj2.sayNumber();
+const double2 = a => a * 2;
+
