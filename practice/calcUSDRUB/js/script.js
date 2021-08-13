@@ -11,14 +11,14 @@ inputRub.addEventListener("input", () => {
   request.send(); //only in POST
 
   //свойства оbj
-  //отслеживает статус готовности  в данный текущий момент(readtState):
-  request.addEventListener("readystatechange", () => {
-    if (request.readyState === 4 && request.status === 200) {
+  request.addEventListener("load", () => {
+    // load - срабатывает один раз, когда ответ готов (не обязательно успешно)
+    if (request.status === 200) {
       const data = JSON.parse(request.response);
-      inputUsd.value = (+inputRub.value / data.current.usd).toFixed(2)//toFixed-количество знаков после точки
+      inputUsd.value = (+inputRub.value / data.current.usd).toFixed(2); //toFixed-количество знаков после точки
       console.log(request.response);
     } else {
-      inputUsd.value = 'Загружается, подождите...'
+      inputUsd.value = "Загружается, подождите...";
     }
   });
 
