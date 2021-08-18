@@ -3,4 +3,3 @@
     $_POST = json_decode(file_get_contents("php://input"), true);
     
     echo var_dump($_POST); // позволяет увидеть даные которые приходят с клиентом   
-?>
