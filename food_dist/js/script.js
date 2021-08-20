@@ -219,10 +219,20 @@ window.addEventListener("DOMContentLoaded", () => {
   };
 
   forms.forEach((item) => {
-    postData(item);
+    bindPostData(item);
   });
 
-  function postData(form) {
+  const postData = async (url, data) => {
+    const res = await fetch(url, {
+      method: "POST",
+       headers: { "Content-type": "application/json; charset=utf-8" },
+      body: data,
+    });
+
+    return await res.json();
+  };
+
+  function bindPostData(form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
@@ -236,18 +246,11 @@ window.addEventListener("DOMContentLoaded", () => {
       form.insertAdjacentElement("afterend", statusMessage);
 
       const formData = new FormData(form);
-      //чтобы formData превратить в формат JSON
-      const object = {};
-      formData.forEach(function (value, key) {
-        object[key] = value;
-      });
 
-      fetch("server.php", {
-        method: "POST",
-        // headers: { "Content-type": "application/json; charset=utf-8" },
-        body: JSON.stringify(object),
-      })
-        .then((data) => data.text())
+      //чтобы formData превратить в формат JSON
+      let json = JSON.stringify(Object.fromEntries(formData.entries()));
+
+      postData("http://localhost:3000/requests", json)
         .then((data) => {
           console.log(data);
           showThanksModal(message.success);
@@ -259,17 +262,6 @@ window.addEventListener("DOMContentLoaded", () => {
         .finally(() => {
           form.reset();
         });
-
-      // request.addEventListener("load", () => {
-      //   if (request.status === 200) {
-      //     console.log(request.response);
-      //     showThanksModal(message.success);
-      //     form.reset();
-      //     statusMessage.remove();
-      //   } else {
-      //     showThanksModal(message.failure);
-      //   }
-      // });
     });
   }
 
