@@ -181,7 +181,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  const postData = async (url) => {
+  const getResource = async (url) => {
     const res = await fetch(url);
     return await res.json(); //js obj
     //for fetch error http 404,501... -don't error
