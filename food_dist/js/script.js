@@ -191,7 +191,13 @@ window.addEventListener("DOMContentLoaded", () => {
       throw new Error(`Could not fetch ${url}, status ${res.status}`);
     }
   };
-
+  getResource("http://localhost:3000/menu")
+  .then(data => {
+    //{деструкторизация obj, на каждой итерации, вытягиваются свойства obj}
+    data.forEach(({img,altimg,title,descr,price}) => {
+      new MenuCard(img,altimg,title,descr,price).render();
+    })
+  })
   new MenuCard(
     "img/tabs/vegy.jpg",
     "vegi",
