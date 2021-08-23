@@ -183,46 +183,61 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const getResource = async (url) => {
     const res = await fetch(url);
-    return await res.json(); //js obj
+
     //for fetch error http 404,501... -don't error
     //for him error is a disconect internet...
     //чтобы обработать catch, need:
     if (!res.ok) {
       throw new Error(`Could not fetch ${url}, status ${res.status}`);
     }
+    return await res.json(); //js obj
   };
   // getResource("http://localhost:3000/menu").then((data) => {
   //   //{деструкторизация obj, на каждой итерации, вытягиваются свойства obj}
-  //   data.forEach(({ img, altimg, title, descr, price }) => {
-  //     new MenuCard(
-  //       img,
-  //       altimg,
-  //       title,
-  //       descr,
-  //       price,
-  //       ".menu .container"
-  //     ).render();
+  // data.forEach(({ img, altimg, title, descr, price }) => {
+  //   new MenuCard(
+  //     img,
+  //     altimg,
+  //     title,
+  //     descr,
+  //     price,
+  //     ".menu .container"
+  //   ).render();
   //   });
   // });
-  getResource("http://localhost:3000/menu").then((data) => createCard(data));
-  function createCard(data) {
-    data.forEach(({ img, altimg, title, descr, price }) => {
-      const element = document.createElement("div");
-      element.classList.add("menu__item");
-      element.innerHTML = `
-        <img src=${img} alt=${altimg} />
-        <h3 class="menu__item-subtitle">${title}</h3>
-        <div class="menu__item-descr">${descr}</div>
-        <div class="menu__item-divider"></div>
-        <div class="menu__item-price">
-           <div class="menu__item-cost">Цена:</div>
-           <div class="menu__item-total"><span>${price}</span> грн/день</div>
-        </div>
-        `;
-
-      document.querySelector(".menu .container").append(element);
+  // имеет свойства data, и приходит сразу в обьекте js
+  axios.get("http://localhost:3000/menu").then((data) => {
+    data.data.forEach(({ img, altimg, title, descr, price }) => {
+      new MenuCard(
+        img,
+        altimg,
+        title,
+        descr,
+        price,
+        ".menu .container"
+      ).render();
     });
-  }
+  });
+
+  // getResource("http://localhost:3000/menu").then((data) => createCard(data));
+  // function createCard(data) {
+  //   data.forEach(({ img, altimg, title, descr, price }) => {
+  //     const element = document.createElement("div");
+  //     element.classList.add("menu__item");
+  //     element.innerHTML = `
+  //       <img src=${img} alt=${altimg} />
+  //       <h3 class="menu__item-subtitle">${title}</h3>
+  //       <div class="menu__item-descr">${descr}</div>
+  //       <div class="menu__item-divider"></div>
+  //       <div class="menu__item-price">
+  //          <div class="menu__item-cost">Цена:</div>
+  //          <div class="menu__item-total"><span>${price}</span> грн/день</div>
+  //       </div>
+  //       `;
+
+  //     document.querySelector(".menu .container").append(element);
+  //   });
+  // }
   // Forms
   const forms = document.querySelectorAll("form");
   const message = {
