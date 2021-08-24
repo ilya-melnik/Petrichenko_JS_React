@@ -320,16 +320,23 @@ window.addEventListener("DOMContentLoaded", () => {
   //0
   const prev = document.querySelector(".offer__slider-prev"),
     next = document.querySelector(".offer__slider-next"),
-    slides = document.querySelectorAll(".offer__slide");
+    slides = document.querySelectorAll(".offer__slide"),
+    //8
+    current = document.querySelector("#current"),
+    total = document.querySelector("#total");
   let slideIndex = 1;
-  //  current = document.querySelector("#current");
-  //  total = document.querySelector("#total");
-  //  offerSliderNext = document.querySelectorAll("offer__slider-next");
 
   //  offerSliderWrapper = document.querySelector(".offer__slider-wrapper");
   //  offerSlide = document.querySelectorAll(".offer__slide");
   //7
   showSlide(slideIndex);
+  //9
+  if (slides.length < 10) {
+    total.textContent = `0${slides.length}`;
+  } else {
+    total.textContent = slides.length;
+  }
+
   //1
   function showSlide(n) {
     // after 4 img, show 1 img and  нажимая в обратную сторону, 4 img
@@ -343,6 +350,13 @@ window.addEventListener("DOMContentLoaded", () => {
     //3
     slides.forEach((item) => (item.style.display = "none"));
     slides[slideIndex - 1].style.display = "block";
+
+    //10 change current img
+    if (slides.length && slideIndex < 10) {
+      current.textContent = `0${slideIndex}`;
+    } else {
+      current.textContent = slideIndex;
+    }
   }
   //4
   function plusSlides(n) {
