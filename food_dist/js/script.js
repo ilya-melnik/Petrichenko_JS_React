@@ -316,4 +316,43 @@ window.addEventListener("DOMContentLoaded", () => {
       closeModal();
     }, 3000);
   }
+  //slider 1
+  //0
+  const prev = document.querySelector(".offer__slider-prev"),
+    next = document.querySelector(".offer__slider-next"),
+    slides = document.querySelectorAll(".offer__slide");
+  let slideIndex = 1;
+  //  current = document.querySelector("#current");
+  //  total = document.querySelector("#total");
+  //  offerSliderNext = document.querySelectorAll("offer__slider-next");
+
+  //  offerSliderWrapper = document.querySelector(".offer__slider-wrapper");
+  //  offerSlide = document.querySelectorAll(".offer__slide");
+  //7
+  showSlide(slideIndex);
+  //1
+  function showSlide(n) {
+    // after 4 img, show 1 img and  нажимая в обратную сторону, 4 img
+    //2
+    if (n > slides.length) {
+      slideIndex = 1;
+    }
+    if (n < 1) {
+      slideIndex = slides.length;
+    }
+    //3
+    slides.forEach((item) => (item.style.display = "none"));
+    slides[slideIndex - 1].style.display = "block";
+  }
+  //4
+  function plusSlides(n) {
+    showSlide((slideIndex += n));
+  }
+  //5,6
+  prev.addEventListener("click", () => {
+    plusSlides(-1);
+  });
+  next.addEventListener("click", () => {
+    plusSlides(1);
+  });
 });
