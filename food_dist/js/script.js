@@ -323,50 +323,106 @@ window.addEventListener("DOMContentLoaded", () => {
     slides = document.querySelectorAll(".offer__slide"),
     //8
     current = document.querySelector("#current"),
-    total = document.querySelector("#total");
+    total = document.querySelector("#total"),
+    slidesWrapper = document.querySelector(".offer__slider-wrapper"),
+    slidesField = document.querySelector(".offer__slider__inner"),
+    width = window.getComputedStyle(slidesWrapper).width;
   let slideIndex = 1;
+  let offset = 0;
 
-  //  offerSliderWrapper = document.querySelector(".offer__slider-wrapper");
-  //  offerSlide = document.querySelectorAll(".offer__slide");
-  //7
-  showSlide(slideIndex);
-  //9
   if (slides.length < 10) {
     total.textContent = `0${slides.length}`;
+    current.textContent = `0${slideIndex}`;
   } else {
     total.textContent = slides.length;
+    current.textContent = slideIndex;
   }
 
-  //1
-  function showSlide(n) {
-    // after 4 img, show 1 img and  нажимая в обратную сторону, 4 img
-    //2
-    if (n > slides.length) {
-      slideIndex = 1;
-    }
-    if (n < 1) {
-      slideIndex = slides.length;
-    }
-    //3
-    slides.forEach((item) => (item.style.display = "none"));
-    slides[slideIndex - 1].style.display = "block";
+  slidesField.style.width = 100 * slides.length + "%";
+  slidesField.style.display = "flex";
+  slidesField.style.transition = "0.5s all";
+  slidesWrapper.style.overflow = "hidden";
+  slides.forEach((slide) => (slide.style.width = width));
 
-    //10 change current img
-    if (slides.length && slideIndex < 10) {
+  next.addEventListener("click", () => {
+    if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
+      offset = 0;
+    } else {
+      offset += +width.slice(0, width.length - 2);
+    }
+    slidesField.style.transform = `translateX(-${offset}px)`;
+
+    if (slideIndex == slides.length) {
+      slideIndex = 1;
+    } else {
+      slideIndex++;
+    }
+
+    if (slides.length < 10) {
       current.textContent = `0${slideIndex}`;
     } else {
       current.textContent = slideIndex;
     }
-  }
-  //4
-  function plusSlides(n) {
-    showSlide((slideIndex += n));
-  }
-  //5,6
+  });
+
   prev.addEventListener("click", () => {
-    plusSlides(-1);
+    if (offset == 0) {
+      offset = +width.slice(0, width.length - 2) * (slides.length - 1);
+    } else {
+      offset -= +width.slice(0, width.length - 2);
+    }
+    slidesField.style.transform = `translateX(-${offset}px)`;
+    if (slideIndex == 1) {
+      slideIndex = slides.length;
+    } else {
+      slideIndex--;
+    }
+    if (slides.length < 10) {
+      current.textContent = `0${slideIndex}`;
+    } else {
+      current.textContent = slideIndex;
+    }
   });
-  next.addEventListener("click", () => {
-    plusSlides(1);
-  });
+
+  // //7
+  // showSlide(slideIndex);
+  // //9
+  // if (slides.length < 10) {
+  //   total.textContent = `0${slides.length}`;
+  // } else {
+  //   total.textContent = slides.length;
+  // }
+
+  // //1
+  // function showSlide(n) {
+  //   // after 4 img, show 1 img and  нажимая в обратную сторону, 4 img
+  //   //2
+  //   if (n > slides.length) {
+  //     slideIndex = 1;
+  //   }
+  //   if (n < 1) {
+  //     slideIndex = slides.length;
+  //   }
+  //   //3
+  //   slides.forEach((item) => (item.style.display = "none"));
+  //   slides[slideIndex - 1].style.display = "block";
+
+  //   //10 change current img
+  //   if (slides.length && slideIndex < 10) {
+  //     current.textContent = `0${slideIndex}`;
+  //   } else {
+  //     current.textContent = slideIndex;
+  //   }
+  // }
+  // //4
+  // function plusSlides(n) {
+  //   showSlide((slideIndex += n));
+  // }
+  // //5,6
+  // prev.addEventListener("click", () => {
+  //   plusSlides(-1);
+  // });
+  // next.addEventListener("click", () => {
+  //   plusSlides(1);
+  // });
 });
