@@ -297,8 +297,8 @@ window.addEventListener("DOMContentLoaded", function () {
 
   let slideIndex = 1;
   let offset = 0;
-  
-  //start value 
+
+  //start value
   if (slides.length < 10) {
     total.textContent = `0${slides.length}`;
     current.textContent = `0${slideIndex}`;
@@ -317,11 +317,14 @@ window.addEventListener("DOMContentLoaded", function () {
     slide.style.width = width;
   });
 
+  function deleteNotDigits(str) {
+    return +str.replace(/\D/g, "");
+  }
   next.addEventListener("click", function () {
-    if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
+    if (offset == deleteNotDigits(width) * (slides.length - 1)) {
       offset = 0;
     } else {
-      offset += +width.slice(0, width.length - 2);
+      offset += deleteNotDigits(width);
     }
     slideFiled.style.transform = `translateX(-${offset}px)`;
     if (slideIndex == slides.length) {
@@ -339,9 +342,9 @@ window.addEventListener("DOMContentLoaded", function () {
 
   prev.addEventListener("click", function () {
     if (offset == 0) {
-      offset = +width.slice(0, width.length - 2) * (slides.length - 1);
+      offset = deleteNotDigits(width) * (slides.length - 1);
     } else {
-      offset -= +width.slice(0, width.length - 2);
+      offset -= deleteNotDigits(width);
     }
     slideFiled.style.transform = `translateX(-${offset}px)`;
     if (slideIndex == 1) {
@@ -356,47 +359,4 @@ window.addEventListener("DOMContentLoaded", function () {
       current.textContent = slideIndex;
     }
   });
-
-  // prev.addEventListener("click", function () {
-  //   plusSlides(-1);
-  // });
-
-  // showSlides(slideIndex);
-
-  // if (slides.length < 10) {
-  //   total.textContent = `0${slides.length}`;
-  // } else {
-  //   total.textContent = slides.length;
-  // }
-
-  // function showSlides(n) {
-  //   if (n > slides.length) {
-  //     slideIndex = 1;
-  //   }
-  //   if (n < 1) {
-  //     slideIndex = slides.length;
-  //   }
-
-  //   slides.forEach((item) => (item.style.display = "none"));
-
-  //   slides[slideIndex - 1].style.display = "block"; // Как ваша самостоятельная работа - переписать на использование классов show/hide
-
-  //   if (slides.length < 10) {
-  //     current.textContent = `0${slideIndex}`;
-  //   } else {
-  //     current.textContent = slideIndex;
-  //   }
-  // }
-
-  // function plusSlides(n) {
-  //   showSlides((slideIndex += n));
-  // }
-
-  // prev.addEventListener("click", function () {
-  //   plusSlides(-1);
-  // });
-
-  // next.addEventListener("click", function () {
-  //   plusSlides(1);
-  // });
 });
